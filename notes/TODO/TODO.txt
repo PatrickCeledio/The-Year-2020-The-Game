@@ -1,0 +1,26 @@
+To implement! 
+
+UI:
+- Point system 
+	- Killing enemies give points
+	- Successful shopping trips give points
+	- High score wins
+	
+Character:
+- Smoother running animation
+- Shopping bag is sways while running
+
+Enemies:
+- How do I make the deaths of my enemies even more bloodier?
+
+Room:
+- Seamless traversing of the rooms
+	- Restarting the game seems to fix the issue
+		- Going back to main menu and choosing continue,
+
+Sounds:
+- Bullet SFX when impact with Coronavirus
+
+Bugs:
+- Fix bug that when restarting game right away when player is going through death animation, the FPS stays at 15
+
