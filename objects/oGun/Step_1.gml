@@ -2,12 +2,12 @@ x = oPlayer.x;
 y = oPlayer.y+1;
 
 if(oPlayer.controller == 0)
-{
+//{
 	
-	// set angle of gun based on mouse location on screen
-	image_angle = point_direction(x,y,mouse_x,mouse_y);
+//	// set angle of gun based on mouse location on screen
+//	image_angle = point_direction(x,y,mouse_x,mouse_y);
 	
-}else
+//}else
 {
 	// variables to record direction of what player is aiming on controller
 	var controllerh = gamepad_axis_value(0,gp_axisrh);

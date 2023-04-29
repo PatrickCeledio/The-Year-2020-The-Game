@@ -7,13 +7,13 @@ menu_x += (menu_x_target - menu_x) / menu_speed;
 // Keyboard Controls
 if(menu_control)
 {
-	if(keyboard_check_pressed(vk_up))
+	if(keyboard_check_pressed(vk_up) || gamepad_button_check_pressed(0, gp_padu))
 	{
 		menu_cursor++;
 		if(menu_cursor >= menu_items) menu_cursor = 0; 
 	}
 
-	if(keyboard_check_pressed(vk_down))
+	if(keyboard_check_pressed(vk_down) || gamepad_button_check_pressed(0, gp_padd))
 	{
 		menu_cursor--;
 		if(menu_cursor < 0) menu_cursor = menu_items - 1; 

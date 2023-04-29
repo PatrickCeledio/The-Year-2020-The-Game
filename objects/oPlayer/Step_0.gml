@@ -3,9 +3,9 @@
 if(hascontrol)
 {
 	// If user is using a keyboard
-	key_left = keyboard_check(vk_left) || keyboard_check(ord("A"));
-	key_right = keyboard_check(vk_right) || keyboard_check(ord("D"));
-	key_jump = keyboard_check_pressed(vk_space) || keyboard_check(ord("W"));
+	key_left = keyboard_check(vk_left) || keyboard_check(ord("A")) || gamepad_button_check(0, gp_padl);
+	key_right = keyboard_check(vk_right) || keyboard_check(ord("D")) || gamepad_button_check(0, gp_padr);
+	key_jump = keyboard_check_pressed(vk_space) || keyboard_check(ord("W")) || gamepad_button_check(0, gp_padu);
 
 	if (key_left) || (key_right) || (key_jump)
 	{
