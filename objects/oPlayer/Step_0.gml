@@ -3,13 +3,19 @@
 if(hascontrol)
 {
 	// If user is using a keyboard
-	key_left = keyboard_check(vk_left) || keyboard_check(ord("A")) || gamepad_button_check(0, gp_padl);
-	key_right = keyboard_check(vk_right) || keyboard_check(ord("D")) || gamepad_button_check(0, gp_padr);
-	key_jump = keyboard_check_pressed(vk_space) || keyboard_check(ord("W")) || gamepad_button_check(0, gp_padu);
-
-	if (key_left) || (key_right) || (key_jump)
+	key_left	= keyboard_check(vk_left) || keyboard_check(ord("A"));
+	key_right	= keyboard_check(vk_right) || keyboard_check(ord("D"));
+	key_jump	= keyboard_check_pressed(vk_space) || keyboard_check(ord("W"));
+	
+	gp_left		= gamepad_button_check(0, gp_padl);
+	gp_right	= gamepad_button_check(0, gp_padr);
+	gp_jump		= gamepad_button_check(0, gp_padu);
+	if ((key_left) || (key_right) || (key_jump))
 	{
 		controller = 0;
+	}else if ((gp_left || gp_right || gp_jump)){
+		controller = 1;
+		var gp_num = gamepad_get_device_count();
 	}
 
 	// If user is using a controller
