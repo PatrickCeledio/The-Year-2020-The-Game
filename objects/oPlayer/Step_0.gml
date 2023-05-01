@@ -10,12 +10,17 @@ if(hascontrol)
 	gp_left		= gamepad_button_check(0, gp_padl);
 	gp_right	= gamepad_button_check(0, gp_padr);
 	gp_jump		= gamepad_button_check(0, gp_padu);
+	
 	if ((key_left) || (key_right) || (key_jump))
 	{
+		// Controller is set to '0' as user is mouse and keyboard
 		controller = 0;
+		
 	}else if ((gp_left || gp_right || gp_jump)){
+		
+		// Controller is set to '1' as user is using a controller
 		controller = 1;
-		var gp_num = gamepad_get_device_count();
+		
 	}
 
 	// If user is using a controller
@@ -56,7 +61,7 @@ if(hascontrol)
 	{
 		key_jump = 1;
 		controller = 1;
-
+ 
 	}
 	
 }

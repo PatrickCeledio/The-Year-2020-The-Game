@@ -10,7 +10,7 @@ if(menu_control)
 	if(keyboard_check_pressed(vk_up) || gamepad_button_check_pressed(0, gp_padu))
 	{
 		menu_cursor++;
-		if(menu_cursor >= menu_items) menu_cursor = 0; 
+		if(menu_cursor >= menu_items) menu_cursor = 0;
 	}
 
 	else if(keyboard_check_pressed(vk_down) || gamepad_button_check_pressed(0, gp_padd))
@@ -26,6 +26,16 @@ if(menu_control)
 		ScreenShake(4, 30);
 		menu_control = false;
 		audio_play_sound(snShot, 10, false);
+		
+		var _maxpads = gamepad_get_device_count();
+
+		for (var i = 0; i < _maxpads; i++)
+		{
+		    if (gamepad_is_connected(i))
+		    {
+		        show_message("Controller detected on slot " + string(i) + "!: " + gamepad_get_description(i));
+		    }
+		}
 	}
 	
 	// For mouse control

@@ -1,12 +1,14 @@
 x = oPlayer.x;
 y = oPlayer.y+1;
 
+// If player is playing with mouse and keyboard
 if(oPlayer.controller == 0)
 {
 	
 	// set angle of gun based on mouse location on screen
 	image_angle = point_direction(x,y,mouse_x,mouse_y);
-	
+
+// If player is playing with controller
 }else if (oPlayer.controller = 1)
 {
 	// variables to record direction of what player is aiming on controller
@@ -30,13 +32,22 @@ recoil = max(0, recoil-1);
 // IF PLAYER IS SHOOTING GUN OBJECT
 if (mouse_check_button(mb_left) || gamepad_button_check(0,gp_shoulderr) && (firingdelay < 0)){
 
+	// Set recoil variables
 	recoil = 4;
 	firingdelay = 5;
+	
+	// Set screen to shake when bullets are shot
 	ScreenShake(2,10);
-	gamepad_set_vibration(2, 1, 1);
+	
+	// Set controller to vibrate when bullets are shot
+	gamepad_set_vibration(0, 1, 1);
+	
+	// Set bullet sounds with bullets are shot
 	audio_sound_pitch(snShot, choose(0.8, 1.0));
 	audio_play_sound(snShot, 5, false);
-	// produces an instance where bullets appear
+	
+	
+	// Produces the instance where bullets appear
 	// and then the with statement allows us to 
 	// assign the bullet speed & direction
 	with(instance_create_layer(x,y,"BulletLayer",oBullet)){
@@ -47,6 +58,7 @@ if (mouse_check_button(mb_left) || gamepad_button_check(0,gp_shoulderr) && (firi
 		// updates the bullet direction
 		image_angle = direction;
 	}
+	
 }
 
 // to add kickback to the gun
