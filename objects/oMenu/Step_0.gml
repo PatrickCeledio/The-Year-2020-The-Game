@@ -4,7 +4,7 @@
 // Item ease in
 menu_x += (menu_x_target - menu_x) / menu_speed;
 
-// Keyboard Controls
+// User menu control
 if(menu_control)
 {
 	if(keyboard_check_pressed(vk_up) || gamepad_button_check_pressed(0, gp_padu))
@@ -12,14 +12,14 @@ if(menu_control)
 		menu_cursor++;
 		if(menu_cursor >= menu_items) menu_cursor = 0;
 	}
-
-	else if(keyboard_check_pressed(vk_down) || gamepad_button_check_pressed(0, gp_padd))
+	
+	if(keyboard_check_pressed(vk_down) || gamepad_button_check_pressed(0, gp_padd))
 	{
 		menu_cursor--;
 		if(menu_cursor < 0) menu_cursor = menu_items - 1; 
 	}
 	
-	else if(keyboard_check_pressed(vk_enter) || gamepad_button_check_pressed(0,gp_face1))
+	if(keyboard_check_pressed(vk_enter) || gamepad_button_check_pressed(0,gp_face1))
 	{
 		menu_x_target = gui_width+200;
 		menu_committed = menu_cursor;
@@ -37,6 +37,25 @@ if(menu_control)
 		    }
 		}
 	}
+	
+	// Toggle full screen
+	if(keyboard_check_pressed(vk_f11)){
+		if(window_get_fullscreen() == false)
+		{
+		    window_set_fullscreen(true);
+		}
+		else window_set_fullscreen(false);
+	}
+	
+	if(keyboard_check_pressed(vk_f9)){
+		if (audio_pause_sound(snOST) == true){
+			audio_play_sound(snOST, 10, false);
+		}else{
+			audio_pause_sound(snOST);
+		}
+	}
+	
+
 	
 	// For mouse control
 	// To capture mouse coordinate at y
@@ -58,17 +77,24 @@ if(menu_control)
 			audio_play_sound(snShot, 10, false);
 		}
 	}
-}
+}// End if(menu_control)
 
 
 // Menu functions
 if (menu_x > gui_width+150) && (menu_committed != -1)
 {
 	switch(menu_committed)
-	{
-		case 3: SlideTransition(TRANS_MODE.NEXT); break;
+	{	
+		// Quit
+		case 0: 
+			game_end(); 
+			break;
+		// Settings
+		case 1:
+			musicOff = true;
+			break;
+		// Load
 		case 2: 
-		{
 			if(!file_exists(SAVEFILE))
 			{
 				SlideTransition(TRANS_MODE.NEXT);
@@ -80,15 +106,11 @@ if (menu_x > gui_width+150) && (menu_committed != -1)
 				file_text_close(file);
 				SlideTransition(TRANS_MODE.GOTO, target);
 			}
-		}	
-		break;	 
-		case 1:
-		{
-			musicOff = true;
-			
-		}
-		
-		break;
-		case 0: game_end(); break;
+			break;
+		// New Game
+		case 3: 
+			SlideTransition(TRANS_MODE.NEXT); 
+			break;
+ 
 	}
-}
+} // End if (menu_x > gui_width+150) && (menu_committed != -1)

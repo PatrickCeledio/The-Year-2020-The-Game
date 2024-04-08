@@ -28,9 +28,10 @@ if(oPlayer.controller == 0)
 firingdelay -= 1;
 recoil = max(0, recoil-1);
 
-// SHOOTING FUNCTIONALITY
-// IF PLAYER IS SHOOTING GUN OBJECT
-if (mouse_check_button(mb_left) || gamepad_button_check(0,gp_shoulderr) && (firingdelay < 0)){
+/* SHOOTING FUNCTIONALITY */
+
+// If player is on mouse and keyboard
+if (mouse_check_button(mb_left) && (firingdelay < 0)){
 
 	// Set recoil variables
 	recoil = 4;
@@ -39,13 +40,36 @@ if (mouse_check_button(mb_left) || gamepad_button_check(0,gp_shoulderr) && (firi
 	// Set screen to shake when bullets are shot
 	ScreenShake(2,10);
 	
-	// Set controller to vibrate when bullets are shot
-	gamepad_set_vibration(0, 1, 1);
+	// Set bullet sounds with bullets are shot
+	audio_sound_pitch(snShot, choose(0.8, 1.0));
+	audio_play_sound(snShot, 5, false);
+
+	// Produces the instance where bullets appear
+	// and then the with statement allows us to 
+	// assign the bullet speed & direction
+	with(instance_create_layer(x,y,"BulletLayer",oBullet)){
+		speed = 25;
+		// other refers to the property of the original object
+		// in this case object oGun
+		direction = other.image_angle + random_range(-4,4);
+		// updates the bullet direction
+		image_angle = direction;
+	}
+}
+
+// If player is on controller; right trigger to fire gun
+if (gamepad_button_check(0,gp_shoulderrb) && (firingdelay < 0)){
+
+	// Set recoil variables
+	recoil = 4;
+	firingdelay = 5;
+	
+	// Set screen to shake when bullets are shot
+	ScreenShake(2,10);
 	
 	// Set bullet sounds with bullets are shot
 	audio_sound_pitch(snShot, choose(0.8, 1.0));
 	audio_play_sound(snShot, 5, false);
-	
 	
 	// Produces the instance where bullets appear
 	// and then the with statement allows us to 
@@ -58,7 +82,13 @@ if (mouse_check_button(mb_left) || gamepad_button_check(0,gp_shoulderr) && (firi
 		// updates the bullet direction
 		image_angle = direction;
 	}
-	
+}
+
+if (gamepad_button_check(0,gp_shoulderrb)){
+	// Set controller to vibrate when bullets are shot
+	// With alarm set to switch vibration off after half a second
+	gamepad_set_vibration(0, 1, 1);
+	alarm[0] = game_get_speed(gamespeed_fps)/2;
 }
 
 // to add kickback to the gun

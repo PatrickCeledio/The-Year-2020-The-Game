@@ -3,7 +3,7 @@
 // SAVEFILE will be a self-defined keyword for Save.sav
 #macro SAVEFILE "Save.sav"
 
-// OST
+// Play music
 audio_play_sound(snOST, 10, false);
 
 gui_width = display_get_gui_width();
